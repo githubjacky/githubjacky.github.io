@@ -1,0 +1,90 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+
+body{
+    background-color: #2E3440;
+    padding: 3rem 10rem;
+    font-family: 'Archivo', sans-serif;
+    text-align: left;
+}
+
+
+.title{
+    h1{
+        padding: 2rem 0;
+        font-size: 4rem;
+        font-weight: bold;
+        font-style: italic;
+        color: #EBCB8B;
+    }
+    img{
+        padding-bottom: 2rem;
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+}
+
+
+.content{
+    h2{
+        padding: 1.5rem 0;
+        font-size: 2.5rem;
+        font-style: italic;
+        font-weight: bold;
+        color: #D08770;
+    }
+    h3{
+        padding: 1rem 6rem;
+        font-size: 1.8em;
+        color: #D8DEE9;
+    }
+    p{
+        font-size: 1.2rem;
+        color: #ECEFF4;
+        text-indent: 2rem;
+        line-height: 2rem;
+        padding: 0.5rem 0;
+    }
+    .remark_main{
+        padding: 0 2rem;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #EBCB8B;
+    }
+    .remark_sub{
+        padding: 0 4rem;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #EBCB8B;
+    }
+    .remark_inline{
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #EBCB8B;
+    }
+    li{
+        padding: 0.5rem 2rem;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #ECEFF4;
+    }
+    a.list{
+        // using with list
+        color: #88C0D0;
+    }
+    a.inline{
+        color: #88C0D0;
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+    img{
+        padding: 0 2rem;
+        width: 100%;
+    }
+}

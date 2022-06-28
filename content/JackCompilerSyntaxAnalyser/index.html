@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Jack Compiler Syntax Analyser</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="img/icon.png">
+        <!-- code block syntax highlighting library -->
+        <link 
+            rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/onedark.min.css" 
+            integrity="sha512-rMDp1YyPJ6wXwTSjhgWbEKOobIWcZCE9pbbdBy46I+RBatSS0HR2NFYn0Fzbb7dqO9sbf8ie0hvnV4C7SKHBcg==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer" 
+        />
+        <!-- code block java script -->
+        <script src="styles/codeBlock.js" defer></script>
+        <!-- styles css -->
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+
+        <!-- fonts selection -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet"> 
+        <!-- font awesome support -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="title">
+            <h1>Jack Compiler Syntax Analyser</h1>
+            <img src="img/cover.jpg" alt="">
+        </div>
+        <div class="content">
+            <h2>Introduction</h2>
+            <p>
+                The purpose of this project is to implement syntax analysis function of the jack programming language. Method
+                includes using regualar expression to <span class="remark_inline">tokenize</span> the jack program then applying contex
+                free grammer to <span class="remark_inline">parse</span> the XML formatted file generated after tokenizing.
+            </p>
+            <h2>Description</h2>
+            <h3>Keyword Definition and Classification</h3>
+            <p>
+                For jack programming language there are five types including keywords, symbols, integer constants, string constants, and
+                identifiers.
+                <ul>
+                    <li>keywords: class types, variable types, subroutine types, statement types, and some constants</li>
+                    <li>symbols: {, }, (, ), [, ], ., ,, ;, +, -, *, /, &, |, <, >, =, ~</li>
+                </ul>
+            </p>
+            <h3>Tokenizing</h3>
+            <div class="container">
+                <p class="language">python</p>
+                <div class="code-wrapper">
+                    <pre>
+                        <code id="code" class="language-python">
+def element_toekenize_process(self, element):
+    if self.string_gap:
+        if element.count('"') %2 != 0:
+            self.imperfect_string_concatenate(element)
+            self.string_gap = False
+            self.imperfect_string = ''
+        else: 
+            self.imperfect_string += (element + ' ')
+    elif self.is_keyword(element):
+        self.write_xml(TOKEN[0], element)
+    elif self.is_symbol(element):
+        self.write_xml(TOKEN[1], element)
+    elif self.is_integer(element):
+        self.write_xml(TOKEN[2], element)
+    elif self.is_string(element):
+        if self.is_string_gap(element):
+            self.imperfect_string = (element[1:] + ' ')
+            self.string_gap = True
+        else:
+            self.write_xml(TOKEN[3], element[1:])
+    elif self.is_pure_identifier(element):
+        self.write_xml(TOKEN[4], element)
+        if element not in self.identifier:
+            self.identifier.append(element)
+    else:  # symbol+token or identifier
+        self.handle_symbol_complex(element)
+                        </code>
+                    </pre>
+                    <button id="copy-button">Copy</button>
+                    <span id="copy-success">Code Copied!</span>
+                </div>
+            </div>
+            <p>
+                Since we first read the program line by line and separate the possible keywords by space, there are some issues
+                shoud be noticed such as the the string contains space or punctuation marks. To see the class I define or the
+                tokenizing rules, check the reference of my github repo.
+            </p>
+            <h3>Parsing</h3>
+            <p>
+                The segment of code in parsing procss is relatively large comparing to the tokenizing because for different keyowords
+                we need to customize the parsing rule and also some exception to handle. Roughly speaking, parsing is kind of process
+                similar to the classification and be careful for some exceptions
+ .           </p>
+            <p style="text-indent: 0;"><strong>Note: My code may be too dirty since I simply handle the exception if there is any.</strong></p>
+            <h3>Testing</h3>
+            <p>
+                In this part, I write a simle comparative python program(text_compare.py) to compare the result(director: analysis resutl) with
+                the answer(directory: test_program) if ther is any inconsistency, program will terminated and show the position(line numbers).
+            </p>
+            <p style="text-indent: 0;"><strong> output and check the result:</strong></p>
+            <div class="container">
+                <p class="language">shell</p>
+                <div class="code-wrapper">
+                    <pre>
+                        <code id="code" class="language-shell">
+python main.py ../test_program/ArrayTest/Main.jack
+                        </code>
+                    </pre>
+                    <button id="copy-button">Copy</button>
+                    <span id="copy-success">Code Copied!</span>
+                </div>
+            </div>
+
+            <h2>Reference</h2>
+            <ul>
+                <li><a class="list" href="https://drive.google.com/file/d/1ujgcS7GoI-zu56FxhfkTAvEgZ6JT7Dxl/view">From Nand to Teris(Project 10)</a></li>
+                <li><a class="list" href="https://github.com/opottghjk00/Jackcompiler_syntax_analyser">My github repo: Jackcompiler_syntax_analyser</a></li>
+            </ul>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    </body>
+</html>

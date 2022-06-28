@@ -1,0 +1,86 @@
+.left-section{
+    grid-column: span 2;
+    height: 100%;
+    background-color: #2E3440;
+    font-family: 'PT Serif', serif;
+    h2, h3{
+        font-weight: 700
+    }
+    p{
+        font-weight: 400
+    }
+}
+
+
+.profile{
+    padding: 1.5rem 0;
+    text-align: center;
+    img{
+        width: 40%;
+        border-radius: 30%;
+        border: 5px solid #5E81AC;
+    }
+    h2{
+        font-size: 2rem;
+        color: #E5E9F0;
+        text-transform: uppercase;
+        padding: 1rem 0;
+    }
+    p{
+        font-size: 1rem;
+        color: #81A1C1;
+    }
+}
+
+
+.interest{
+    padding: 1rem 0;
+    width: 100%;
+    h3{
+        text-align: left;
+        padding: 0 2.3rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #D8DEE9;
+    }
+    ul{
+        text-align: left;
+        padding: 0 3.5rem;
+        font-size: 1.3rem;
+        color: #8FBCBB;
+    }
+}
+
+
+.study{
+    padding: 1rem 0;
+    width: 100%;
+    h3{
+        text-align: left;
+        padding: 0 2.3rem;
+        font-size: 1.5rem;
+        font-weight:700;
+        color: #D8DEE9;
+    }
+    ul{
+        text-align: left;
+        padding: 0 3.5rem;
+        font-size: 1.3rem;
+        color: #8FBCBB;
+    }
+}
+
+
+.contact-info{
+    padding: 2rem 0;
+    width: 100%;
+    text-align: center;
+    h3{
+        font-size: 1.3rem;
+        color: #D8DEE9;
+    }
+    p{
+        font-size: 1rem;
+        color: #81A1C1;
+    }
+}
