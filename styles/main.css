@@ -182,13 +182,16 @@
     .left-section h2 {
       font-size: 1.2rem; }
     .left-section h3 {
-      font-size: 1rem; }
+      font-size: 1rem;
+      padding: 0.2rem; }
     .left-section p {
       font-size: 0.6rem; }
     .left-section .contact-info a {
       font-size: 0.8rem; }
-    .left-section .fa\ fa-link {
-      font-size: 0.6rem; }
+    .left-section i {
+      font-size: 1rem; }
+    .left-section ul {
+      padding: 0 1.5rem; }
   .right-section {
     grid-column: span 5; }
     .right-section .main-title h2 {

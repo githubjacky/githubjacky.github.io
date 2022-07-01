@@ -52,10 +52,14 @@
         grid-column: span 4;
         padding: 0;
         h2{font-size: 1.2rem;}
-        h3{font-size: 1rem;}
+        h3{
+            font-size: 1rem;
+            padding: 0.2rem;
+        }
         p{font-size: 0.6rem;}
         .contact-info{a{font-size: 0.8rem;}}
-        .fa\ fa-link{font-size: 0.6rem;}
+        i{font-size: 1rem;}
+        ul{padding: 0 1.5rem;}
     }
     .right-section{
         grid-column: span 5;
