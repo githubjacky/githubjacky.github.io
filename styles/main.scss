@@ -13,3 +13,34 @@
 @import "left-section";
 @import "right-section";
 @import "blog";
+
+
+/* make the blog resopnsive*/
+@media screen and (max-width:880px){
+    .left-section{
+        grid-column: span 3
+    }
+    .right-section{
+        grid-column: span 6;
+        .blogs{
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media screen and (max-width:780px){
+    .left-section{
+        grid-column: span 3
+    }
+    .right-section{
+        grid-column: span 6;
+        .main-title{
+            h2{
+                font-size: 2rem;
+            }
+        }
+        .blogs{
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
