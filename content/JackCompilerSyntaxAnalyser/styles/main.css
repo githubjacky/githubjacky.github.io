@@ -138,7 +138,7 @@ body {
   body {
     padding: 1rem 1rem; }
   .title h1 {
-    font-size: 2rem; }
+    font-size: 1.8rem; }
   .title img {
     height: 300px; }
   .content h2 {
@@ -156,4 +156,4 @@ body {
     .container .language {
       font-size: 1.2rem; }
     .container .code-wrapper pre {
-      font-size: 0.85rem; } }
+      font-size: 0.7rem; } }
