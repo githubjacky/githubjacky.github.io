@@ -87,7 +87,7 @@ body {
     font-weight: bold;
     font-style: italic;
     text-align: right;
-    padding: 0 3px;
+    padding: 0 10px;
     border-radius: 5px 5px 0 0; }
   .container .code-wrapper {
     position: relative; }
@@ -105,7 +105,7 @@ body {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  padding: 3px;
+  padding: 10px;
   background-color: #5E81AC;
   border: none;
   outline: none;
@@ -134,6 +134,26 @@ body {
 #copy-success.show-message {
   display: inline-block; }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   body {
-    padding: 1rem 1rem; } }
+    padding: 1rem 1rem; }
+  .title h1 {
+    font-size: 2rem; }
+  .title img {
+    height: 300px; }
+  .content h2 {
+    font-size: 1.5rem; }
+  .content h3 {
+    font-size: 1.2rem; }
+  .content p {
+    font-size: 0.8rem; }
+  .content a {
+    font-size: 0.8rem; }
+  .content img {
+    width: 80%; }
+  .container {
+    width: 480px; }
+    .container .language {
+      font-size: 1.2rem; }
+    .container .code-wrapper pre {
+      font-size: 0.85rem; } }
