@@ -6,7 +6,7 @@
 
 body {
   background-color: #2E3440;
-  padding: 3rem 10rem;
+  padding: 3rem 15rem;
   font-family: 'Archivo', sans-serif;
   text-align: left; }
 
@@ -30,14 +30,13 @@ body {
   color: #D08770; }
 
 .content h3 {
-  padding: 1rem 6rem;
+  padding: 1rem 2rem;
   font-size: 1.8em;
   color: #D8DEE9; }
 
 .content p {
   font-size: 1.2rem;
   color: #ECEFF4;
-  text-indent: 2rem;
   line-height: 2rem;
   padding: 0.5rem 0; }
 
@@ -59,7 +58,7 @@ body {
   color: #EBCB8B; }
 
 .content li {
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 0;
   font-size: 1.2rem;
   font-style: italic;
   color: #ECEFF4; }
@@ -73,14 +72,14 @@ body {
   font-style: italic; }
 
 .content img {
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 0;
   width: 60%;
   height: 400px; }
 
 .container {
   width: 800px;
   overflow-x: auto;
-  padding: 1rem 2rem; }
+  padding: 1rem 0; }
   .container .language {
     color: #8FBCBB;
     background-color: #5E81AC;
