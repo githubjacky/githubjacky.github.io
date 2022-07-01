@@ -16,7 +16,7 @@
 
 
 /* make the blog resopnsive*/
-@media screen and (max-width:880px){
+@media screen and (max-width:1080px){
     .left-section{
         grid-column: span 3
     }
@@ -24,6 +24,8 @@
         grid-column: span 6;
         .blogs{
             grid-template-columns: repeat(2, 1fr);
+            padding: 0;
+            .blog{padding:0;}
         }
     }
 }
@@ -40,44 +42,68 @@
             }
         }
         .blogs{
-            .blog{padding: 0;}
             grid-template-columns: repeat(1, 1fr);
+            padding: 0;
+            .blog{margin: 0.5rem;}
         }
     }
 }
 
-
-@media screen and (max-width:500px){
+@media screen and (max-width:550px){
     .left-section{
-        grid-column: span 4;
-        padding: 0;
-        img{width: 70%;}
-        h2{font-size: 1.2rem;}
-        h3{
-            font-size: 1rem;
-            padding: 0.2rem;
-        }
-        p{font-size: 0.6rem;}
-        .contact-info{a{font-size: 0.8rem;}}
-        i{font-size: 0.8rem;}
-        ul{padding: 0 1.5rem;}
+        grid-column: span 4
     }
     .right-section{
         grid-column: span 5;
         .main-title{
             h2{
-                font-size: 1.1rem;
+                font-size: 2rem;
             }
         }
         .blogs{
-            grid-template-columns: repeat(1, 1fr);
             padding: 0;
             .blog{margin: 0.5rem;}
-            .JackCompilerSyntaxAnalyser{
-                p{
-                    text-align: center
-                }
-            }
         }
     }
 }
+
+@media screen and (max-width: 500px){
+    .main{grid-template-columns: repeat(1, 1fr);}
+    .left-section{img{width: 30%;}}
+}
+
+
+// @media screen and (max-width:500px){
+//     .left-section{
+//         grid-column: span 4;
+//         padding: 0;
+//         img{width: 70%;}
+//         h2{font-size: 1.2rem;}
+//         h3{
+//             font-size: 1rem;
+//             padding: 0.2rem;
+//         }
+//         p{font-size: 0.6rem;}
+//         .contact-info{a{font-size: 0.8rem;}}
+//         i{font-size: 0.8rem;}
+//         ul{padding: 0 1.5rem;}
+//     }
+//     .right-section{
+//         grid-column: span 5;
+//         .main-title{
+//             h2{
+//                 font-size: 1.1rem;
+//             }
+//         }
+//         .blogs{
+//             grid-template-columns: repeat(1, 1fr);
+//             padding: 0;
+//             .blog{margin: 0.5rem;}
+//             .JackCompilerSyntaxAnalyser{
+//                 p{
+//                     text-align: center
+//                 }
+//             }
+//         }
+//     }
+// }

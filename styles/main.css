@@ -155,13 +155,16 @@
   color: #D8DEE9; }
 
 /* make the blog resopnsive*/
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 1080px) {
   .left-section {
     grid-column: span 3; }
   .right-section {
     grid-column: span 6; }
     .right-section .blogs {
-      grid-template-columns: repeat(2, 1fr); } }
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0; }
+      .right-section .blogs .blog {
+        padding: 0; } }
 
 @media screen and (max-width: 780px) {
   .left-section {
@@ -171,37 +174,25 @@
     .right-section .main-title h2 {
       font-size: 2rem; }
     .right-section .blogs {
-      grid-template-columns: repeat(1, 1fr); }
-      .right-section .blogs .blog {
-        padding: 0; } }
-
-@media screen and (max-width: 500px) {
-  .left-section {
-    grid-column: span 4;
-    padding: 0; }
-    .left-section img {
-      width: 70%; }
-    .left-section h2 {
-      font-size: 1.2rem; }
-    .left-section h3 {
-      font-size: 1rem;
-      padding: 0.2rem; }
-    .left-section p {
-      font-size: 0.6rem; }
-    .left-section .contact-info a {
-      font-size: 0.8rem; }
-    .left-section i {
-      font-size: 0.8rem; }
-    .left-section ul {
-      padding: 0 1.5rem; }
-  .right-section {
-    grid-column: span 5; }
-    .right-section .main-title h2 {
-      font-size: 1.1rem; }
-    .right-section .blogs {
       grid-template-columns: repeat(1, 1fr);
       padding: 0; }
       .right-section .blogs .blog {
-        margin: 0.5rem; }
-      .right-section .blogs .JackCompilerSyntaxAnalyser p {
-        text-align: center; } }
+        margin: 0.5rem; } }
+
+@media screen and (max-width: 550px) {
+  .left-section {
+    grid-column: span 4; }
+  .right-section {
+    grid-column: span 5; }
+    .right-section .main-title h2 {
+      font-size: 2rem; }
+    .right-section .blogs {
+      padding: 0; }
+      .right-section .blogs .blog {
+        margin: 0.5rem; } }
+
+@media screen and (max-width: 500px) {
+  .main {
+    grid-template-columns: repeat(1, 1fr); }
+  .left-section img {
+    width: 30%; } }
