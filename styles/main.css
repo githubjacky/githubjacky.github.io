@@ -179,6 +179,8 @@
   .left-section {
     grid-column: span 4;
     padding: 0; }
+    .left-section img {
+      width: 70%; }
     .left-section h2 {
       font-size: 1.2rem; }
     .left-section h3 {
@@ -189,7 +191,7 @@
     .left-section .contact-info a {
       font-size: 0.8rem; }
     .left-section i {
-      font-size: 1rem; }
+      font-size: 0.8rem; }
     .left-section ul {
       padding: 0 1.5rem; }
   .right-section {

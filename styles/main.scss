@@ -51,6 +51,7 @@
     .left-section{
         grid-column: span 4;
         padding: 0;
+        img{width: 70%;}
         h2{font-size: 1.2rem;}
         h3{
             font-size: 1rem;
@@ -58,7 +59,7 @@
         }
         p{font-size: 0.6rem;}
         .contact-info{a{font-size: 0.8rem;}}
-        i{font-size: 1rem;}
+        i{font-size: 0.8rem;}
         ul{padding: 0 1.5rem;}
     }
     .right-section{
