@@ -40,7 +40,39 @@
             }
         }
         .blogs{
+            .blog{padding: 0;}
             grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
+
+
+@media screen and (max-width:500px){
+    .left-section{
+        grid-column: span 4;
+        padding: 0;
+        h2{font-size: 1.2rem;}
+        h3{font-size: 1rem;}
+        p{font-size: 0.6rem;}
+        .contact-info{a{font-size: 0.8rem;}}
+        .fa\ fa-link{font-size: 0.6rem;}
+    }
+    .right-section{
+        grid-column: span 5;
+        .main-title{
+            h2{
+                font-size: 1.1rem;
+            }
+        }
+        .blogs{
+            grid-template-columns: repeat(1, 1fr);
+            padding: 0;
+            .blog{margin: 0.5rem;}
+            .JackCompilerSyntaxAnalyser{
+                p{
+                    text-align: center
+                }
+            }
         }
     }
 }

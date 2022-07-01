@@ -149,9 +149,9 @@
   color: #EBCB8B; }
 
 .JackCompilerSyntaxAnalyser p {
-  text-align: left;
+  text-align: center;
   font-size: 0.8rem;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 1rem;
   color: #D8DEE9; }
 
 /* make the blog resopnsive*/
@@ -171,4 +171,32 @@
     .right-section .main-title h2 {
       font-size: 2rem; }
     .right-section .blogs {
-      grid-template-columns: repeat(1, 1fr); } }
+      grid-template-columns: repeat(1, 1fr); }
+      .right-section .blogs .blog {
+        padding: 0; } }
+
+@media screen and (max-width: 500px) {
+  .left-section {
+    grid-column: span 4;
+    padding: 0; }
+    .left-section h2 {
+      font-size: 1.2rem; }
+    .left-section h3 {
+      font-size: 1rem; }
+    .left-section p {
+      font-size: 0.6rem; }
+    .left-section .contact-info a {
+      font-size: 0.8rem; }
+    .left-section .fa\ fa-link {
+      font-size: 0.6rem; }
+  .right-section {
+    grid-column: span 5; }
+    .right-section .main-title h2 {
+      font-size: 1.1rem; }
+    .right-section .blogs {
+      grid-template-columns: repeat(1, 1fr);
+      padding: 0; }
+      .right-section .blogs .blog {
+        margin: 0.5rem; }
+      .right-section .blogs .JackCompilerSyntaxAnalyser p {
+        text-align: center; } }
