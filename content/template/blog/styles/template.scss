@@ -8,7 +8,7 @@
 
 body{
     background-color: #2E3440;
-    padding: 3rem 10rem;
+    padding: 3rem 15rem;
     font-family: 'Archivo', sans-serif;
     text-align: left;
 }
@@ -39,25 +39,18 @@ body{
         color: #D08770;
     }
     h3{
-        padding: 1rem 6rem;
+        padding: 1rem 2rem;
         font-size: 1.8em;
         color: #D8DEE9;
     }
     p{
         font-size: 1.2rem;
         color: #ECEFF4;
-        text-indent: 2rem;
         line-height: 2rem;
         padding: 0.5rem 0;
     }
     .remark_main{
         padding: 0 2rem;
-        font-size: 1.2rem;
-        font-style: italic;
-        color: #EBCB8B;
-    }
-    .remark_sub{
-        padding: 0 4rem;
         font-size: 1.2rem;
         font-style: italic;
         color: #EBCB8B;
@@ -68,7 +61,7 @@ body{
         color: #EBCB8B;
     }
     li{
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 0;
         font-size: 1.2rem;
         font-style: italic;
         color: #ECEFF4;
@@ -83,7 +76,7 @@ body{
         font-style: italic;
     }
     img{
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 0;
         width: 60%;
         height: 400px;
     }

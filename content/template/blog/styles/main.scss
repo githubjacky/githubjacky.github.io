@@ -1,6 +1,26 @@
 @import "template";
-@import "codeBlock"
+@import "codeBlock";
 
 
-@media screen and (max-width:500px){
+@media screen and (max-width:700px){
+    body{
+        padding: 1rem 1rem;
+    }
+    .title{
+        h1{font-size: 1.8rem;}
+        img{height: 300px;}
+    }
+    .content{
+        h2{font-size: 1.5rem;}
+        h3{font-size: 1.2rem;}
+        p{font-size: 0.8rem}
+        a{font-size: 0.8rem}
+        .remark_inline{font-size: 0.8rem}
+        img{width: 80%;}
+    }
+    .container{
+        width: 480px;
+        .language{font-size: 1.2rem;}
+        .code-wrapper{pre{font-size: 0.7rem;}}
+    }
 }

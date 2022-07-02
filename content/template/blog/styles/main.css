@@ -46,6 +46,12 @@ body {
   font-style: italic;
   color: #EBCB8B; }
 
+.content .remark_sub {
+  padding: 0 4rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #EBCB8B; }
+
 .content .remark_inline {
   font-size: 1.2rem;
   font-style: italic;
@@ -142,8 +148,6 @@ body {
   .content p {
     font-size: 0.8rem; }
   .content a {
-    font-size: 0.8rem; }
-  .content li {
     font-size: 0.8rem; }
   .content .remark_inline {
     font-size: 0.8rem; }
