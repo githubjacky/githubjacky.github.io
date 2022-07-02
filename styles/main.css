@@ -138,6 +138,7 @@
 .PttCrawler p {
   text-align: center;
   font-size: 0.8rem;
+  padding: 0.5rem 0;
   color: #D8DEE9; }
 
 .JackCompilerSyntaxAnalyser h4 {

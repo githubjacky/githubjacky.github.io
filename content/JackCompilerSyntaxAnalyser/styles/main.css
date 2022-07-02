@@ -149,7 +149,8 @@ body {
   .content .remark_main {
     font-size: 0.8rem; }
   .content img {
-    width: 80%; }
+    width: 80%;
+    height: 300px; }
   .container {
     width: 480px; }
     .container .language {
