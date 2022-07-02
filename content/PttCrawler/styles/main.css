@@ -89,40 +89,38 @@ body {
       color: #ABB2BF;
       padding: 0 6px;
       border-radius: 0 0 5px 5px;
-      font-size: 1.2rem;
-      line-height: 1.5rem; }
+      font-size: 1.2rem; }
     .container .code-wrapper:hover #copy-button {
       opacity: 1; }
-
-#copy-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: #5E81AC;
-  border: none;
-  outline: none;
-  color: #ABB2BF;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.2s ease-in;
-  opacity: 0; }
-  #copy-button:hover {
-    background-color: #5E81AC90; }
-
-#copy-success {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #5E81AC;
-  color: #EBCB8B;
-  padding: 16px 32px;
-  font-size: 24px;
-  border-radius: 5px;
-  display: none; }
+  .container #copy-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #5E81AC;
+    border: none;
+    outline: none;
+    color: #ABB2BF;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    opacity: 0; }
+    .container #copy-button:hover {
+      background-color: #5E81AC90; }
+  .container #copy-success {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #5E81AC;
+    color: #EBCB8B;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 5px;
+    padding: 1rem 1rem;
+    display: none; }
 
 #copy-success.show-message {
   display: inline-block; }
@@ -131,16 +129,16 @@ body {
   body {
     padding: 1rem 1rem; }
   .title h1 {
-    font-size: 1.8rem; }
+    font-size: 1.5rem; }
   .title img {
     height: 300px; }
   .content h2 {
-    font-size: 1.5rem; }
+    font-size: 1.3rem; }
   .content h3 {
-    font-size: 1.2rem; }
+    font-size: 1rem; }
   .content p {
     font-size: 0.8rem; }
-  .content a {
+  .content a.inline {
     font-size: 0.8rem; }
   .content li {
     font-size: 0.8rem; }
@@ -152,10 +150,12 @@ body {
     width: 80%;
     height: 300px; }
   .container {
-    width: 480px; }
+    width: 100%; }
     .container .language {
-      font-size: 1.2rem; }
+      font-size: 1rem; }
     .container .code-wrapper pre {
       font-size: 0.7rem; }
-  #copy-button {
-    font-size: 0.8rem; } }
+    .container #copy-button {
+      font-size: 0.8rem; }
+    .container #copy-success {
+      font-size: 1.1rem; } }
