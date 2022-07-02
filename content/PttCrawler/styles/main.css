@@ -41,16 +41,9 @@ body {
   padding: 0.5rem 0; }
 
 .content .remark_main {
-  padding: 0 2rem;
   font-size: 1.2rem;
-  font-style: italic;
-  color: #EBCB8B; }
-
-.content .remark_sub {
-  padding: 0 4rem;
-  font-size: 1.2rem;
-  font-style: italic;
-  color: #EBCB8B; }
+  font-weight: bold;
+  color: #ECEFF4; }
 
 .content .remark_inline {
   font-size: 1.2rem;
@@ -149,13 +142,20 @@ body {
     font-size: 0.8rem; }
   .content a {
     font-size: 0.8rem; }
+  .content li {
+    font-size: 0.8rem; }
   .content .remark_inline {
     font-size: 0.8rem; }
+  .content .remark_main {
+    font-size: 0.8rem; }
   .content img {
-    width: 80%; }
+    width: 80%;
+    height: 300px; }
   .container {
     width: 480px; }
     .container .language {
       font-size: 1.2rem; }
     .container .code-wrapper pre {
-      font-size: 0.7rem; } }
+      font-size: 0.7rem; }
+  #copy-button {
+    font-size: 0.8rem; } }
