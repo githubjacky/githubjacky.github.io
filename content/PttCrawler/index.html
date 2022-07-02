@@ -5,6 +5,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/x-icon" href="img/icon.png">
+        <!-- code block syntax highlighting library -->
+        <link 
+            rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/onedark.min.css" 
+            integrity="sha512-rMDp1YyPJ6wXwTSjhgWbEKOobIWcZCE9pbbdBy46I+RBatSS0HR2NFYn0Fzbb7dqO9sbf8ie0hvnV4C7SKHBcg==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer" 
+        />
+        <!-- code block java script -->
+        <script src="styles/codeBlock.js" defer></script>
         <!-- styles css -->
         <link rel="stylesheet" type="text/css" href="styles/main.css">
 
@@ -33,6 +43,187 @@
                     </p>
                 </p>
                 <h2>Implementation</h2>
+                <h3>login issue handle</h3>
+                <div class="container">
+                    <p class="language">python</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-python">
+def login(self):
+    try:
+        self.bot.login(self.id, self.password)
+    except PTT.exceptions.LoginError:
+        self.bot.log('warning: fail to log in')
+        sys.exit()
+    except PTT.exceptions.WrongIDorPassword:
+        self.bot.log('warning: wrong password or id')
+        sys.exit()
+    except PTT.exceptions.LoginTooOften:
+        self.bot.log('try too often, please wait for a moment to log in')
+        sys.exit()
+    except self.bot.unregistered_user:
+        self.bot.log('warning: the user is not registered')
+    self.bot.log('log in successfully!')
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
+                <h3>additonal operation for push/boo/arrow content</h3>
+                <div class="container">
+                    <p class="language">python</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-python">
+def get_push_info(self, post):
+    push_info_dict = {}
+    count_push = count_boo = count_arrow = get_push_content = get_boo_content = get_arrow_content = False
+    for index in self.push_indexes:
+        if index == 12:
+            count_push = True
+            push_info_dict['push_count'] = 0
+        elif index == 13:
+            count_boo = True
+            push_info_dict['boo_count'] = 0
+        elif index == 14:
+            count_arrow = True
+            push_info_dict['arrow_count'] = 0
+        elif index == 15:
+            get_push_content = True
+            push_info_dict['push_coontent'] = []
+        elif index == 16:
+            get_boo_content = True
+            push_info_dict['boo_content'] = []
+        elif index == 17:
+            get_arrow_content = True
+            push_info_dict['arrow_content'] = []
+
+    for push in post.push_list:
+        if push.type == PTT.data_type.push_type.PUSH and count_push:
+            push_info_dict['push_count'] += 1
+        if push.type == PTT.data_type.push_type.PUSH and get_push_content:
+            push_info_dict['push_coontent'].append(push.content.replace(' ', ''))
+        if push.type == PTT.data_type.push_type.BOO and count_boo:
+            push_info_dict['boo_count'] += 1
+        if push.type == PTT.data_type.push_type.BOO and get_boo_content:
+            push_info_dict['boo_content'].append(push.content.replace(' ', ''))
+        if push.type == PTT.data_type.push_type.ARROW and count_arrow:
+            push_info_dict['arrow_count'] += 1
+        if push.type == PTT.data_type.push_type.ARROW and get_arrow_content:
+            push_info_dict['arrow_content'].append(push.content.replace(' ', ''))
+
+    return push_info_dict
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
+                <h3>output format</h3>
+                <ul>
+                    <li>1. excel</li>
+                    <div class="container">
+                        <p class="language">python</p>
+                        <div class="code-wrapper">
+                            <pre>
+                                <code id="code" class="language-python">
+def output_excel(dataList, path):
+    wb = xw.Book()
+    sheet = wb.sheets[0]
+
+    cols = list(dataList[0].keys())
+    last_col = chr(65+(len(cols)-1))
+
+    # set the format for the cell
+    sheet.range(f'A1:{last_col}1').api.Font.Bold = True
+    sheet.range(f'A1:{last_col}1').api.Font.Name = 'Microsoft YaHei'
+    sheet.range(f'A1:{last_col}1').api.HorizontalAlignment = -4108
+    sheet.range(f'A1:{last_col}1').api.VerticalAlignment = -4107
+    sheet.range(f'A1:{last_col}1').row_height = 17.4
+
+    # set the columns name
+    ars = 65
+    for item in cols:
+        colName = chr(ars)
+        sheet.range(f'{colName}1').value = item
+        ars += 1
+    sheet.autofit(axis='columns')
+    # insert the value
+    for i in range(len(dataList)):
+        write = list(dataList[i].values())
+        ars = 65
+        for element in write:
+            colName = chr(ars)
+            if isinstance(element, list):
+                total_comment = ''
+                for index, comment in enumerate(element):
+                    index = f'{index+1}.'
+                    total_comment = total_comment + index + comment + ' '
+                sheet.range(f'{colName}{i+2}').value = total_comment
+            else:
+                sheet.range(f'{colName}{i+2}').value = element
+            ars += 1
+
+    wb.save(path)
+                                </code>
+                            </pre>
+                            <button id="copy-button">Copy</button>
+                            <span id="copy-success">Code Copied!</span>
+                        </div>
+                    </div>
+                    <li>2. json</li>
+                    <div class="container">
+                        <p class="language">python</p>
+                        <div class="code-wrapper">
+                            <pre>
+                                <code id="code" class="language-python">
+def output_json(dataList, path):
+    file = open(path, 'w', encoding="utf-8")
+    for data in dataList:
+        jsonString = json.dumps(data, ensure_ascii=False)
+        file.write(jsonString + '\n')
+    file.close()
+                                </code>
+                            </pre>
+                            <button id="copy-button">Copy</button>
+                            <span id="copy-success">Code Copied!</span>
+                        </div>
+                    </div>
+                    <li>3. pdf</li>
+                    <div class="container">
+                        <p class="language">python</p>
+                        <div class="code-wrapper">
+                            <pre>
+                                <code id="code" class="language-python">
+def output_pdf(dataList, path):
+    pdf = PDF()
+    pdf.set_margins(left=20, right=20, top=15)
+
+    pdf.set_auto_page_break(auto = True, margin = 15)  # Set auto page break
+    pdf.add_page()
+    pdf.print_header()
+    for index, dataDict in enumerate(dataList):
+        items = list(dataDict.items())
+        for item in items:
+            if item[0] == 'title':
+                pdf.paragraph_title(f'{index+1}', f'{item[1]}\n')
+            else:
+                pdf.paragraph_body(item)
+        # pdf.ln(10)
+        pdf.add_page()
+
+    pdf.output(path)
+                                </code>
+                            </pre>
+                            <button id="copy-button">Copy</button>
+                            <span id="copy-success">Code Copied!</span>
+                        </div>
+                    </div>
+                    <p class="remark-main">for more informatio about the pdf formatting, please see the source code "pdf_format.py"</p>
+                </ul>
+                <h2>Usage</h2>
+                <p class="remark-main">check the "README.md" of my github repo</p>
                 <h2>Reference</h2>
                 <ul>
                         <li><a class="list" href="https://github.com/opottghjk00/ptt_crawler">my github repo: ptt_crawler</a></li>
@@ -40,5 +231,6 @@
                 </ul>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
     </body>
 </html>

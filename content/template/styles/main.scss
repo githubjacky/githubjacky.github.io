@@ -1,0 +1,35 @@
+@import "template";
+@import "codeBlock";
+
+
+@media screen and (max-width:700px){
+    body{
+        padding: 1rem 1rem;
+    }
+    .title{
+        h1{font-size: 1.5rem;}
+        img{height: 300px;}
+    }
+    .content{
+        h2{font-size: 1.3rem;}
+        h3{font-size: 1rem;}
+        p{font-size: 0.8rem}
+        a.inline{font-size: 0.8rem}
+        li{font-size: 0.8rem}
+        .remark_inline{font-size: 0.8rem}
+        .remark_main{font-size: 0.8rem}
+        img{
+            width: 80%;
+            height: 300px;
+        }
+    }
+    .container{
+        width: 100%;
+        .language{font-size: 1rem;}
+        .code-wrapper{pre{font-size: 0.7rem;}}
+        #copy-button{font-size: 0.8rem;}
+        #copy-success{
+            font-size: 1.1rem;
+        }
+    }
+}
