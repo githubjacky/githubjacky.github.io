@@ -52,12 +52,11 @@ body {
 
 .content li {
   padding: 0.5rem 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-style: italic;
   color: #ECEFF4; }
 
 .content a.list {
-  font-size: 1.5rem;
   color: #88C0D0; }
 
 .content a.inline {
@@ -132,15 +131,13 @@ body {
   .title h1 {
     font-size: 1.5rem; }
   .title img {
-    height: 250px; }
+    height: 300px; }
   .content h2 {
     font-size: 1.3rem; }
   .content h3 {
     font-size: 1rem; }
   .content p {
     font-size: 0.8rem; }
-  .content a.list {
-    font-size: 1rem; }
   .content a.inline {
     font-size: 0.8rem; }
   .content li {
