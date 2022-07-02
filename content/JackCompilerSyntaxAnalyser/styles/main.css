@@ -89,8 +89,7 @@ body {
       color: #ABB2BF;
       padding: 0 6px;
       border-radius: 0 0 5px 5px;
-      font-size: 1.2rem;
-      line-height: 1.5rem; }
+      font-size: 1.2rem; }
     .container .code-wrapper:hover #copy-button {
       opacity: 1; }
 
@@ -131,13 +130,13 @@ body {
   body {
     padding: 1rem 1rem; }
   .title h1 {
-    font-size: 1.8rem; }
+    font-size: 1.5rem; }
   .title img {
     height: 300px; }
   .content h2 {
-    font-size: 1.5rem; }
+    font-size: 1.3rem; }
   .content h3 {
-    font-size: 1.2rem; }
+    font-size: 1rem; }
   .content p {
     font-size: 0.8rem; }
   .content a {
@@ -152,9 +151,9 @@ body {
     width: 80%;
     height: 300px; }
   .container {
-    width: 480px; }
+    width: 100%; }
     .container .language {
-      font-size: 1.2rem; }
+      font-size: 1rem; }
     .container .code-wrapper pre {
       font-size: 0.7rem; }
   #copy-button {
