@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="img/icon.png">
+        <!-- code block syntax highlighting library -->
+        <link 
+            rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/onedark.min.css" 
+            integrity="sha512-rMDp1YyPJ6wXwTSjhgWbEKOobIWcZCE9pbbdBy46I+RBatSS0HR2NFYn0Fzbb7dqO9sbf8ie0hvnV4C7SKHBcg==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer" 
+        />
+        <!-- code block java script -->
+        <script src="styles/codeBlock.js" defer></script>
+        <!-- styles css -->
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+        <!-- fonts selection -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet"> 
+        <!-- font awesome support -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="blog">
+            <div class="title">
+                <h1>Basic Integration</h1>
+                <img src="img/cover.jpg" alt="">
+            </div>
+            <div class="content">
+                <h2>Introduction</h2>
+                <p>
+                    This project provide and interface for solving integration problems using guass quadrature and monte carlo integratioon
+                    no matter the problem is univariable or multivarialbe. Furthermore, based on interest, I also implement the function for
+                    importance samplingin quasi way through halton sequences.
+                </p>
+                <p>
+                    For Gauss Quadrature method I implement:
+                    <ul>
+                        <li>1. Gauss Hermite</li>
+                        <li>2. Gauss Laguerre</li>
+                        <li>3. Gauss Legendre</li>
+                    </ul>
+                </p>
+                <p>
+                    As for monte carlo method I implement:
+                    <ul>
+                        <li>1. naive monte carlo</li>
+                        <li>2. quasi monte carlo</li>
+                        <li>3. importance samplng</li>
+                    </ul>
+                </p>
+                <p class="remark_main">note: both the quasi monte carlo and importance sampling using halton sequencs to implment</p>
+                <h2>Gauss Quadrature</h2>
+                <h3>Gauss Hermite</h3>
+                <h3>Gauss Laguerre</h3>
+                <h3>Gauss Legendre</h3>
+                <h3>Algorithhm</h3>
+                <h2>Monte Carlo Integration</h2>
+                <h3>Naive Monte Carlo</h3>
+                <h3>Quasi Monte Carol</h3>
+                <h3>Importance Sanmpling</h3>
+                <h2>Reference</h2>
+                <ul>
+                    <li><a class="list" href="">my github repo: BasicIntegration.jl</a></li>
+                    <li><a class="list" href=""></a></li>
+                </ul>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    </body>
+</html>
