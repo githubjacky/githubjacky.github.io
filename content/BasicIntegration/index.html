@@ -24,6 +24,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet"> 
         <!-- font awesome support -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- latex support -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </head>
     <body>
         <div class="blog">
@@ -34,17 +38,21 @@
             <div class="content">
                 <h2>Introduction</h2>
                 <p>
-                    This project provide and interface for solving integration problems using guass quadrature and monte carlo integratioon
+                    This project provide and interface for solving integration problems using guassian quadrature and monte carlo integratioon
                     no matter the problem is univariable or multivarialbe. Furthermore, based on interest, I also implement the function for
                     importance samplingin quasi way through halton sequences.
                 </p>
                 <p>
-                    For Gauss Quadrature method I implement:
+                    For Gaussian Quadrature method I implement:
                     <ul>
                         <li>1. Gauss Hermite</li>
                         <li>2. Gauss Laguerre</li>
                         <li>3. Gauss Legendre</li>
                     </ul>
+                </p>
+                <p class="remark_main">
+                    note: rely on this project <a class = "inline" href="https://github.com/JuliaApproximation/FastGaussQuadrature.jl">FastGaussQuadrature.jl</a>
+                    to generate the nodes and weights required by the gaussian quadrature method
                 </p>
                 <p>
                     As for monte carlo method I implement:
@@ -54,20 +62,308 @@
                         <li>3. importance samplng</li>
                     </ul>
                 </p>
-                <p class="remark_main">note: both the quasi monte carlo and importance sampling using halton sequencs to implment</p>
+                <p>since the quais montecarlo method rely on the halton sequences with the prime = 2, it's better to let the number of nodes = \(2^n-1\)</p>
+                <p class="remark_main">
+                    note: both the quasi monte carlo and importance sampling use <a class="inline" href="https://github.com/tobydriscoll/HaltonSequences.jl">HaltonSequences.jl</a>
+                    to implment
+                </p>
                 <h2>Gauss Quadrature</h2>
                 <h3>Gauss Hermite</h3>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+function GHermite(g::Function, a::Real, b::Real, n::Int64)  # one dimension case
+    nodes, w = gausshermite(n)
+    invp(x) = exp(x^2)
+    if a == -Inf && b == Inf
+        f = x -> g(x) * invp(x)
+    else
+        x1, jcb1, x2, jcb2 = GHdt(a, b)
+        f = t -> invp(t) * g(x1(x2(t))) * jcb1(x2(t)) * jcb2(t)
+    end
+    return dot(f.(nodes), w)
+end
+
+# multidimension case
+function GHermite(g::Function, A::Vector{T}, B::Vector{P}, n::Int64) where {T<:Real, P<:Real}
+    length(A) == length(B) ? (dim = length(A)) : throw("dimension of domain inconsist")
+    invp(x) = exp(x^2)
+    nodes, w = gausshermite(n)
+    Nodes, W = nodesGen(n, dim, nodes, w)  # the algorithm to generate gausshermite nodes and weights
+    f = MultiDim_GHdt(g, A, B, invp, dim)
+    return dot(f.(Nodes), W)
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
                 <h3>Gauss Laguerre</h3>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+function GLaguerre(g::Function, a::Real, b::Real, n::Int64)  # one dimension case
+    nodes, w = gausslaguerre(n)
+    invp(x) = exp(x)
+    if a == 0 && b == Inf
+        f = x -> invp(x) * g(x)
+    else
+        x1, jcb1, x2, jcb2 = GLadt(a, b)
+        f = t -> invp(t) * g(x1(x2(t))) * jcb1(x2(t)) * jcb2(t)
+    end
+    return dot(f.(nodes), w)
+end
+
+# multidimension case
+function GLaguerre(g::Function, A::Vector{T}, B::Vector{P}, n::Int64) where {T<:Real, P<:Real}
+    length(A) == length(B) ? (dim = length(A)) : throw("dimension of domain inconsist")
+    invp(x) = exp(x)
+    nodes, w = gausslaguerre(n)
+    Nodes, W = nodesGen(n, dim, nodes, w)  # the algorithm to generate gausshermite nodes and weights
+    f = MultiDim_GLadt(g, A, B, invp, dim)
+    return dot(f.(Nodes), W)
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
                 <h3>Gauss Legendre</h3>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+function GLegendre(g::Function, a::Real, b::Real, n::Int64)  # one dimension case
+    nodes, w = gausslegendre(n)
+    if a == -1 && b == 1
+        f = g
+    else
+        x1, jcb1 = GLdt(a, b)
+        f = t -> g(x1(t)) * jcb1(t)
+    end
+    return dot(f.(nodes), w)
+end
+
+# multidimension case
+function GLegendre(g::Function, A::Vector{T}, B::Vector{P}, n::Int64) where {T<:Real, P<:Real}
+    length(A) == length(B) ? (dim = length(A)) : throw("dimension of domain inconsist")
+    nodes, w = gausslegendre(n)
+    Nodes, W = nodesGen(n, dim, nodes, w)  # the algorithm to generate gausshermite nodes and weights
+    g = MultiDim_GLdt(g, A, B, dim)
+    return dot(g.(Nodes), W)
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
                 <h3>Algorithhm</h3>
+                <p class="remark_main">this is the algorithm to generate the high dimension nodes and weights required by Gaussian Quadrature</p>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+function nodesGen(n, dim, nodes::Vector{Float64}, w::Vector{Float64})
+    N = n^dim
+    Nodes, W = Vector{Vector{Float64}}(undef, N), Vector{Float64}(undef, N)
+    Nodesᵢ, Wᵢ = repeat([nodes[1]], dim), repeat([w[1]], dim)
+    index, i = ones(Int64, dim), 1
+    while true
+        Nodes[i] = copy(Nodesᵢ)
+        u = 1
+        for k in Wᵢ
+            u *= k
+        end
+        W[i] = u
+        i != N ? (i += 1) : break 
+        if index[1] != n
+            index[1] += 1
+            Nodesᵢ[1], Wᵢ[1] = nodes[index[1]], w[index[1]]
+        else
+            for j = 2:dim
+                if index[j] == n
+                    index[j] = 1
+                    Nodesᵢ[j], Wᵢ[j] = nodes[1], w[1]
+                else
+                    index[j] += 1
+                    Nodesᵢ[j], Wᵢ[j] = nodes[index[j]], w[index[j]]
+                    break
+                end
+            end
+            index[1] = 1
+            Nodesᵢ[1], Wᵢ[1] = nodes[1], w[1]
+        end
+    end
+    return Nodes, W
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
+                <h3>Additinal Gauss Quadrature</h3>
+                <p class="remark_main">this function provided to deal with the problem including different kind of domain</p>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+#= provide another method to deal with the intergral: [-Inf, b],
+    take advantage of both gausshermite and gausslaguerre =#
+function GQ(g::Function, b::Real, n::Int64)
+    nodes1, w1 = gausshermite(n)
+    invp1(x) = exp(x^2)
+    f1 = x -> invp1(x) * g(x)
+    nodes2, w2 = gausslaguerre(n)
+    invp2(x) = exp(x)
+    f2 = b == 0 ? (x -> invp2(x) * g(x)) : (x -> invp2(x) * g(x+b))
+    return dot(f1.(nodes1), w1) - dot(f2.(nodes2), w2)
+end
+
+
+function GQ(g::Function, A::Vector{T}, B::Vector{P}, n) where {T<:Real, P<:Real}
+    length(A) == length(B) ? (dim = length(A)) : throw("dimension of domain inconsist")
+    nodesArr = Vector{Vector{Float64}}(undef, 3) 
+    wArr = Vector{Vector{Float64}}(undef, 3)
+    nodesArr[1], wArr[1] = gausshermite(n)
+    nodesArr[2], wArr[2] = gausslaguerre(n)
+    nodesArr[3], wArr[3] = gausslegendre(n)
+    groupIndex = Vector{Int64}(undef, dim)
+    g = addInvp(g, A, B, dim, groupIndex)
+    Nodes, W = nodesGenGQ(n, dim, nodesArr, wArr, groupIndex)
+    return dot(g.(Nodes), W)
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
                 <h2>Monte Carlo Integration</h2>
                 <h3>Naive Monte Carlo</h3>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+function MCM(g::Function, a::Real, b::Real, nodesNum::Vector{Int64}; seed)  # one dimension case
+    if a == 0 && b == 1
+        f = g 
+    else
+        x1, jcb1 = MCMdt(a, b)
+        f = t -> g(x1(t)) * jcb1(t)
+    end
+    n = length(nodesNum)
+    res = Vector{Float64}(undef, n)
+    for i = 1:n
+        @inbounds res[i] = mean(f.(rand(Xoshiro(seed), nodesNum[i])))
+    end
+    return res
+end
+
+# multi dimension case
+function MCM(g::Function, A::Vector{T}, B::Vector{P}, nodesNum::Vector{Int64}; seed) where {T<:Real, P<:Real}
+    length(A) == length(B) ? (dim = length(A)) : error("dimension of domain inconsist")
+    n = length(nodesNum)
+    f = multiDim_MCMdt(g, A, B, dim)
+    res = Vector{Float64}(undef, n)
+    for i = 1:n
+        nodes = collect(eachrow(rand(Xoshiro(seed), nodesNum[i], dim)))
+        @inbounds res[i] = mean(f.(nodes))
+    end
+    return res
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
                 <h3>Quasi Monte Carol</h3>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+function quaMCM(g::Function, a::Real, b::Real, nodesNum::Vector{Int64})  # one dimension case
+    if a == 0 && b == 1
+        f = g 
+    else
+        x1, jcb1 = MCMdt(a, b)
+        f = t -> g(x1(t)) * jcb1(t)
+    end
+    n = length(nodesNum)
+    res = Vector{Float64}(undef, n)
+    for i = 1:n
+        @inbounds res[i] = mean(f.(Halton(2, length=nodesNum[i])))
+    end
+    return res
+end
+
+# multi dimenstion case
+function quaMCM(g::Function, A::Vector{T}, B::Vector{P}, nodesNum::Vector{Int64}) where {T<:Real, P<:Real}
+    length(A) == length(B) ? (dim = length(A)) : error("dimension of domain inconsist")
+    n = length(nodesNum)
+    f = multiDim_MCMdt(g, A, B, dim)
+    res = Vector{Float64}(undef, n)
+    for i = 1:n
+        @inbounds res[i] = mean(f.(HaltonPoint(dim, length=nodesNum[i])))
+    end
+    return res
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
                 <h3>Importance Sanmpling</h3>
+                <div class="container">
+                    <p class="language">julia</p>
+                    <div class="code-wrapper">
+                        <pre>
+                            <code id="code" class="language-julia">
+# one dimension case
+function IShalton(g::Function, a::Real, b::Real, d::UnivariateDistribution, nodesNum::Vector{Int64})
+    if a == 0 && b == 1
+        f = g 
+    else
+        x1, jcb1 = MCMdt(a, b)
+        f = t -> g(x1(t)) * jcb1(t)
+    end
+    F(x) = f(x) / pdf(d, x)
+    n = length(nodesNum)
+    res = Vector{Float64}(undef, n)
+    for i = 1:n
+        sample = quantile.(d, Halton(2, length=nodesNum[i]))
+        @inbounds res[i] = mean(F.(sample))
+    end
+    return res
+end
+                            </code>
+                        </pre>
+                        <button id="copy-button">Copy</button>
+                        <span id="copy-success">Code Copied!</span>
+                    </div>
+                </div>
+                <p class="remark_main">note: importance sampling can only deal with univariable problem just now and the prupose the use the halton sequences is to do the inverse transform sampling</p>
                 <h2>Reference</h2>
                 <ul>
-                    <li><a class="list" href="">my github repo: BasicIntegration.jl</a></li>
-                    <li><a class="list" href=""></a></li>
+                    <li><a class="list" href="https://github.com/opottghjk00/BasicIntegration.jl">my github repo: BasicIntegration.jl</a></li>
+                    <li><a class="list" href="https://en.wikipedia.org/wiki/Gaussian_quadrature">Gaussian Quadrature</a></li>
+                    <li><a class="list" href="https://en.wikipedia.org/wiki/Monte_Carlo_integration">Monte Carlo integration</a></li>
+                    <li><a class="list" href="https://en.wikipedia.org/wiki/Quasi-Monte_Carlo_method#Drawbacks_of_quasi-Monte_Carlo">Quasi Monte Carlo method</a></li>
+                    <li><a class="list" href="https://en.wikipedia.org/wiki/Importance_sampling">Importance sampling</a></li>
                 </ul>
             </div>
         </div>
