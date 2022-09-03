@@ -12,7 +12,7 @@
 <meta name="author" content="b08303033 經濟四 葉秀軒" />
 
 
-<title>hw2</title>
+<title>Model Selection Using FDR and Lasso</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,12 +362,25 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">hw2</h1>
+<h1 class="title toc-ignore">Model Selection Using FDR and Lasso</h1>
 <h4 class="author">b08303033 經濟四 葉秀軒</h4>
 
 </div>
 
 
+<div id="brief-introduction" class="section level3">
+<h3>brief introduction</h3>
+<ul>
+<li>Codebook for semi_conductor quality-control data from a
+semi-conductor manufacturing process. There are hundreds of diagnostic
+sensors along the production line, measuring various inputs and outputs
+in the process.</li>
+<li>The dataset contains the following variables:</li>
+<li>FAIL : a binary variable on whether the chip was a failure (failure:
+1; otherwise 0)</li>
+<li>SIG1, SIG2, … , SIG200 : 200 vector of diagnostic signals.</li>
+</ul>
+</div>
 <div id="basic-setup" class="section level3">
 <h3>basic setup</h3>
 <pre class="r"><code>rm(list=ls(all=TRUE))
