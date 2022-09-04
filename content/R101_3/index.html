@@ -13,7 +13,7 @@
 
 <meta name="date" content="2022-08-31" />
 
-<title>hw3</title>
+<title>Identify The Heterogeneous Effect using PCA</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -363,13 +363,19 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">hw3</h1>
+<h1 class="title toc-ignore">Identify The Heterogeneous Effect using
+PCA</h1>
 <h4 class="author">b08303033 經濟四 葉秀軒</h4>
 <h4 class="date">2022-08-31</h4>
 
 </div>
 
 
+<div id="breief-introduction" class="section level2">
+<h2>breief introduction</h2>
+<p>follow the algorithm mentioned in Kim and Oka (2012, Section 2),
+replicate the results: columns 4, 5, and 6 in their Table 3.</p>
+</div>
 <div id="basic-setup" class="section level2">
 <h2>basic setup</h2>
 <pre class="r"><code>rm(list=ls(all=TRUE))
@@ -409,7 +415,7 @@ base_data[sss] &lt;- base_data[,s]^3</code></pre>
 <pre class="r"><code># 1. threshold for convergence of SSR
 # The threshold mentioned in Kim and Oka is 10^-9, but could be very time-consuming
 # Even 10^-6 takes several minutes, convergence in step2 is very slow.
-threshold &lt;- 1e-9
+threshold &lt;- 1e-4
 
 # 2. number of factors
 r &lt;- 9</code></pre>
@@ -430,38 +436,41 @@ certain threshold value</em></li>
 <li><strong>replication of column 4 in table 3</strong></li>
 </ul>
 <pre class="r"><code>step1_res4 &lt;- step1(X, threshold, r)</code></pre>
-<pre><code>## [1] &quot;total iterations: 650&quot;
-## [1] &quot;SSR             : 20.3569174344385&quot;
+<pre><code>## [1] &quot;total iterations: 240&quot;
+## [1] &quot;SSR             : 20.3576027205683&quot;
 ## [1] &quot;esitmated coefficients:&quot;
-##         d1         d3         d5         d7         d9        d11        d13 
-## 0.08744492 0.24193677 0.22241177 0.20946223 0.07111870 0.07405205 0.02546681 
-##        d15 
-## 0.12072847</code></pre>
+##          d1          d3          d5          d7          d9         d11 
+##  0.08282490  0.23258154  0.20863641  0.19089207  0.04908498  0.04965174 
+##         d13         d15 
+## -0.00138918  0.09139784</code></pre>
 <ul>
 <li><strong>replication of column 5 in table 3</strong></li>
 </ul>
 <pre class="r"><code>step1_res5 &lt;- step1(c(X, s[1:47]), threshold, r)</code></pre>
-<pre><code>## [1] &quot;total iterations: 181&quot;
-## [1] &quot;SSR             : 18.3768686263712&quot;
+<pre><code>## [1] &quot;total iterations: 40&quot;
+## [1] &quot;SSR             : 18.3770458856997&quot;
 ## [1] &quot;esitmated coefficients:&quot;
 ##         d1         d3         d5         d7         d9        d11        d13 
-## 0.08443225 0.22738638 0.21400820 0.19585994 0.08273395 0.09034163 0.05464173 
+## 0.08484613 0.22891101 0.21803390 0.20335923 0.09320889 0.10328767 0.06991780 
 ##        d15 
-## 0.16496649</code></pre>
+## 0.18225252</code></pre>
 <ul>
 <li><strong>replication of column 6 in table 3</strong></li>
 </ul>
 <pre class="r"><code>step1_res6 &lt;- step1(c(X, s[1:47], ss[1:47]), threshold, r)</code></pre>
-<pre><code>## [1] &quot;total iterations: 86&quot;
-## [1] &quot;SSR             : 16.3885762093263&quot;
+<pre><code>## [1] &quot;total iterations: 34&quot;
+## [1] &quot;SSR             : 16.3886362019461&quot;
 ## [1] &quot;esitmated coefficients:&quot;
-##         d1         d3         d5         d7         d9        d11        d13 
-## 0.10913223 0.22977221 0.20645558 0.16622694 0.06528607 0.04234150 0.00894011 
-##        d15 
-## 0.07068783</code></pre>
+##          d1          d3          d5          d7          d9         d11 
+## 0.107508958 0.227391002 0.202036468 0.160752231 0.059741038 0.036994332 
+##         d13         d15 
+## 0.003926512 0.066652860</code></pre>
 </div>
 <div id="extension" class="section level4">
 <h4>extension</h4>
+<ul>
+<li><strong>using lasso to select variables</strong></li>
+</ul>
 <pre class="r"><code>xnames &lt;- lasso_select(&quot;r_div_p1000&quot;, c(X, s, ss), 5, 0)
 xnames</code></pre>
 <pre><code>##  [1] &quot;d1&quot;        &quot;d3&quot;        &quot;d5&quot;        &quot;d7&quot;        &quot;d9&quot;        &quot;d11&quot;      
@@ -479,14 +488,14 @@ xnames</code></pre>
 ## [73] &quot;ss_time35&quot; &quot;ss_time36&quot; &quot;ss_time37&quot; &quot;ss_time38&quot; &quot;ss_time39&quot; &quot;ss_time40&quot;
 ## [79] &quot;ss_time41&quot; &quot;ss_time42&quot; &quot;ss_time43&quot; &quot;ss_time44&quot; &quot;ss_time45&quot; &quot;ss_time46&quot;
 ## [85] &quot;ss_time47&quot; &quot;ss_time48&quot;</code></pre>
-<pre class="r"><code>step1_res6 &lt;- step1(xnames, 1e-4, r)</code></pre>
-<pre><code>## [1] &quot;total iterations: 3180&quot;
-## [1] &quot;SSR             : 16.4936365416939&quot;
+<pre class="r"><code>step1_res6 &lt;- step1(xnames, 1e-6, r)</code></pre>
+<pre><code>## [1] &quot;total iterations: 36350&quot;
+## [1] &quot;SSR             : 16.4254722408038&quot;
 ## [1] &quot;esitmated coefficients:&quot;
 ##           d1           d3           d5           d7           d9          d11 
-##  0.103257029  0.219237193  0.192278779  0.162297955  0.054904127  0.036580171 
+##  0.098019648  0.221454330  0.191496012  0.153014664  0.044437813  0.028779574 
 ##          d13          d15 
-## -0.001528985  0.063586476</code></pre>
+## -0.003762609  0.063489421</code></pre>
 </div>
 <div id="step-2" class="section level4">
 <h4>Step 2</h4>
@@ -498,24 +507,24 @@ minimizing SSR1 and continue to iterate as in step 1.</em></p></li>
 <li><p><strong>replication of column 4 in table 3</strong></p></li>
 </ul>
 <pre class="r"><code>step2_res4 &lt;- step2(X, threshold, r)</code></pre>
-<pre><code>## [1] &quot;total iterations: 9797&quot;
-## [1] &quot;SSR             : 20.3569175565404&quot;
+<pre><code>## [1] &quot;total iterations: 2490&quot;
+## [1] &quot;SSR             : 20.3697812251732&quot;
 ## [1] &quot;esitmated coefficients:&quot;
 ##         d1         d3         d5         d7         d9        d11        d13 
-## 0.08746048 0.24196245 0.22247671 0.20954215 0.07119866 0.07414085 0.02555363 
+## 0.08767389 0.24057514 0.22855875 0.21457414 0.07255571 0.07567934 0.02396817 
 ##        d15 
-## 0.12081425</code></pre>
+## 0.11669930</code></pre>
 <ul>
 <li><strong>replication of column 5 in table 3</strong></li>
 </ul>
 <pre class="r"><code>step2_res5 &lt;- step2(c(X, s[1:47]), threshold, r)</code></pre>
-<pre><code>## [1] &quot;total iterations: 6283&quot;
-## [1] &quot;SSR             : 18.3768686936875&quot;
+<pre><code>## [1] &quot;total iterations: 2019&quot;
+## [1] &quot;SSR             : 18.383325797195&quot;
 ## [1] &quot;esitmated coefficients:&quot;
 ##         d1         d3         d5         d7         d9        d11        d13 
-## 0.08442934 0.22737602 0.21400319 0.19584537 0.08270400 0.09030180 0.05459513 
+## 0.08495624 0.22750887 0.21906159 0.20278287 0.08879597 0.09600782 0.06086073 
 ##        d15 
-## 0.16490739</code></pre>
+## 0.16996430</code></pre>
 <ul>
 <li><strong>replication of column 6 in table 3</strong></li>
 </ul>
@@ -538,28 +547,28 @@ in steps 1 and 2</em></li>
 <pre class="r"><code>pick(step1_res4, step2_res4)</code></pre>
 <pre><code>## [1] &quot;step1 estimates is chosen&quot;
 ##     step1_estimate
-## d1      0.08744492
-## d3      0.24193677
-## d5      0.22241177
-## d7      0.20946223
-## d9      0.07111870
-## d11     0.07405205
-## d13     0.02546681
-## d15     0.12072847</code></pre>
+## d1      0.08282490
+## d3      0.23258154
+## d5      0.20863641
+## d7      0.19089207
+## d9      0.04908498
+## d11     0.04965174
+## d13    -0.00138918
+## d15     0.09139784</code></pre>
 <ul>
 <li><strong>replication of column 5 in table 3</strong></li>
 </ul>
 <pre class="r"><code>pick(step1_res5, step2_res5)</code></pre>
 <pre><code>## [1] &quot;step1 estimates is chosen&quot;
 ##     step1_estimate
-## d1      0.08443225
-## d3      0.22738638
-## d5      0.21400820
-## d7      0.19585994
-## d9      0.08273395
-## d11     0.09034163
-## d13     0.05464173
-## d15     0.16496649</code></pre>
+## d1      0.08484613
+## d3      0.22891101
+## d5      0.21803390
+## d7      0.20335923
+## d9      0.09320889
+## d11     0.10328767
+## d13     0.06991780
+## d15     0.18225252</code></pre>
 <ul>
 <li><strong>replication of column 6 in table 3</strong></li>
 </ul>
