@@ -1,0 +1,25 @@
+# tutorial of the virtual environment manager: poetry
+- list all available command
+```{bash}
+poetry env list
+```
+
+- list all dependencies
+```{bash}
+poetry show
+```
+
+- specify the python executalbe
+```{bash}
+poetry env use
+```
+
+- activate the shell
+```{bash}
+poetry shell
+```
+
+- run the script(no need to activate the shell)
+```{bash}
+poetry run python {your_scripy.py}
+```
