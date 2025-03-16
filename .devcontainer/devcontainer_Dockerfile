@@ -1,0 +1,27 @@
+# build the lemonade binary
+FROM golang:1.22 AS build-lemonade
+RUN go install github.com/lemonade-command/lemonade@latest
+
+
+# Base image: Ruby with necessary dependencies for Jekyll
+# source: https://github.com/academicpages/academicpages.github.io/blob/master/Dockerfile
+FROM ruby:3.2
+
+COPY --from=build-lemonade /go/bin/lemonade /usr/local/bin
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    nodejs \
+    build-essential npm unzip neovim wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy Gemfile into the container (necessary for `bundle install`)
+COPY Gemfile ./
+
+# Install bundler and dependencies
+RUN gem install bundler:2.3.26 && bundle install
+
+# Command to serve the Jekyll site
+# CMD ["jekyll", "serve", "-H", "0.0.0.0", "-w", "--config", "_config.yml,_config_docker.yml"]
+

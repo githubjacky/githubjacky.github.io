@@ -1,0 +1,26 @@
+x-volume-deploy: &volume-deploy
+  volumes:
+    - type: bind
+      source: ..
+      target: /personal-website
+    - type: bind
+      source: /usr/local/cuda-12.4
+      target: /usr/local/cuda-12.4
+  # deploy:
+  #   resources:
+  #     reservations:
+  #       devices:
+  #         - driver: nvidia
+  #           count: 3
+  #           capabilities: [gpu]
+
+
+services:
+  devcontainer:
+    <<: *volume-deploy
+    build:
+      context: .
+      dockerfile: devcontainer_Dockerfile
+    ports: [4000:4000]
+    environment: [JEKYLL_ENV=docker]
+    command: /bin/sh -c "trap :; TERM INT; sleep infinity & wait"

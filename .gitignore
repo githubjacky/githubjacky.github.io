@@ -25,6 +25,8 @@ report/meetings/**/*.log
 report/progress_report/**/*.log
 report/paper/**/*.log
 
+.sass-cache/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
