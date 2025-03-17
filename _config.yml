@@ -12,7 +12,7 @@ title                    : "Jacky / Research Logs"
 title_separator          : "-"
 name                     : &name "Hsiu-Hsuan Yeh"
 description              : &description "personal description"
-url                      : https://githubjacky.github.io/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://githubjacky.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "githubjacky/githubjacky.github.io"
 

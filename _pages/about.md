@@ -12,15 +12,22 @@ whoami
 ======
 <p style="text-align: justify; text-indent: 2em">
 I am a 2nd-year master's student in the Economics department at NTU, and I am
-devoted to research on Social Networks and Large Language Models (LLMs).
-Regarding Social Networks, I am interested in how interpersonal relationships
-are constructed, the factors related to them, and how these factors further
-affect their dynamics. Additionally, I am working on introducing Graph Neural
-Networks (GNNs) to solve the network endogeneity problem. The topic of my
-master's paper is inspecting the dynamics of relationship networks constructed
-from annual call detail records (CDRs) involving more than 300 thousand
-people, with each month averaging over 1 billion CDRs. Regarding LLMs, I am
-fascinated by the advancements in LLMs and how they can facilitate various
+devoted to research on Social Networks and the economic applications of Large Language Models (LLMs).
+
+Regarding Social Networks, I am currently conducting innovative research for my master's thesis on 
+identifying potential "permanent migrants" through sophisticated analysis of call detail records (CDRs). 
+
+This large-scale data project involves:
+
+1.  Processing and analyzing over 1 billion monthly CDRs across a 10-month period,
+2. Tracking mobility patterns of 600,000+ individuals to identify long-term relocation trends,
+3. Developing novel algorithms to distinguish between temporary mobility and permanent migration.
+
+My research has potentially significant practical applications for urban planning, infrastructure development, 
+and policy formation.
+
+
+Regarding LLMs, I am fascinated by the advancements in LLMs and how they can facilitate various
 NLP tasks. I am currently working on utilizing LLMs to automatically build
 textual economic indexes, such as the well-known Economic Policy Uncertainty
 Index.
